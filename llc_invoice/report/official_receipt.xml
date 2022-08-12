@@ -7,26 +7,33 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">llc_invoice.shopee_official_receipt</field>
         <field name="report_file">llc_invoice.shopee_official_receipt</field>
-        <!-- <field name="binding_model_id" ref="account.model_account_move"/>
-        <field name="binding_type">report</field> -->
+        <field name="paperformat_id" ref="paperformat_official_receipt"/>
+        <!-- <field name="binding_model_id" ref="account.model_account_move"/> -->
+        <!-- <field name="binding_type">report</field> -->
     </record>
 
     <template id="shopee_official_receipt" >
         <t t-call="web.html_container" >
-            <t t-call="web.internal_layout">
-                <style> 
-                    :root {
-                        font-size: 10pt;
-                    }
-                    table, th, tr, td {
-                        padding: 0px;
-                    }
-                    .left-margin {
-                        padding-left: 90px;
-                    }
-                </style>
                 <t t-foreach="docs" t-as="o" >
-                    <table width="100%">
+                    <!-- <t t-call="web.internal_layout"> -->
+                        <style> 
+                            * {
+                                margin: 0;
+                                padding: 0;
+                                font-family: Courier;
+                                font-size: 12px;
+                            }
+                            table, th, tr, td {
+                                padding: 0px;
+                            }
+                            tr {
+                                line-height: 3mm;
+                            }
+                            .left-margin {
+                                padding-left: 90px;
+                            }
+                        </style>
+                    <table width="100%" style="border:none !important;" >
                         <tr>
                             <td class="left-margin" style="width: 70%; left: 120px;"><span t-esc="o.partner_id.name" /></td>
                             <td class="left-margin" style="width: 30%; left: 120px;"><span t-esc="str(o.invoice_date).replace('-', '/')" /></td>
@@ -45,18 +52,18 @@
                             <td class="left-margin">REF#</td>
                         </tr>
                     </table>
-                    <span style="height: 10px; border-style: solid;" >.</span>
+                    <span style="height: 12px;" >.</span>
                 <div class="page">
                     <t t-set="lines" t-value="o.invoice_line_ids" />
-                    <div style="height: 275px;">
-                    <table width="100%" border="1">
+                    <div style="height: 125px;">
+                    <table width="100%" border="0">
                     <t t-foreach="lines" t-as="line">
                         <tr>
                             <td style="width: 8%;"><span t-esc="'{:.2f}'.format(line.quantity)" /></td>
                             <td style="width: 10%;">.</td>
                             <td style="width: 62%;"><span t-esc="line.product_id.name" /></td>
                             <td style="width: 8%;"><span t-esc="'{:.2f}'.format(line.price_unit)" /></td>
-                            <td style="width: 12%;"><span t-esc="'{:.2f}'.format(line.price_subtotal)" /></td>
+                            <td style="width: 12%;"><span style="padding-left: 15px;" t-esc="'{:.2f}'.format(line.price_subtotal)" /></td>
                         </tr>
                     </t>
                     </table>
@@ -106,7 +113,7 @@
                         </tr>
                     </table>
                 </div>
-                </t>
+                <!-- </t> -->
             </t>
         </t>
     </template>

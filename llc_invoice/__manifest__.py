@@ -8,6 +8,7 @@
     'description' : """""",
     'data': [
         'views/account_move_view_inherited.xml',
+        'paperformats/paperformat.xml',
         'report/official_receipt.xml'
     ],
     'demo': [],

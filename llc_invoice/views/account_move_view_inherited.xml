@@ -8,8 +8,8 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
             <!-- Add your xpath here -->
-            <xpath expr="//button[@name='button_draft']" position="after">
-                <button name="action_receipt_print" string="Official Receipt" type="object" groups="account.group_account_invoice" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+            <xpath expr="//button[@name='action_register_payment']" position="after">
+                <button name="action_receipt_print" string="Official Receipt" type="object" class="oe_highlight" groups="account.group_account_invoice" attrs="{'invisible': [('state', '=', 'draft')]}"/>
             </xpath>
             
         </field>
